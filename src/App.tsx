@@ -4,6 +4,7 @@ import "@fontsource/inter";
 import Button from "@mui/joy/Button";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
+import ModeToggle from "./components/DarkModeToggle";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <CssVarsProvider>
+        <ModeToggle />
         <Sheet
           sx={{
             width: "100vw",
