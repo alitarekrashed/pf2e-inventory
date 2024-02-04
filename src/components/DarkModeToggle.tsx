@@ -1,6 +1,8 @@
 import Button from "@mui/joy/Button";
 import { useColorScheme } from "@mui/joy/styles";
 import React from "react";
+import { FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 
 export default function ModeToggle() {
   const { mode, setMode } = useColorScheme();
@@ -22,7 +24,7 @@ export default function ModeToggle() {
         setMode(mode === "light" ? "dark" : "light");
       }}
     >
-      {mode === "light" ? "Turn dark" : "Turn light"}
+      {mode === "light" ? <FaSun /> : <FaMoon />}
     </Button>
   );
 }

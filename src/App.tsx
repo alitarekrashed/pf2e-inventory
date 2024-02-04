@@ -5,6 +5,7 @@ import Button from "@mui/joy/Button";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import ModeToggle from "./components/DarkModeToggle";
+import { Box } from "@mui/system";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -12,7 +13,19 @@ function App() {
   return (
     <>
       <CssVarsProvider>
-        <ModeToggle />
+        <Sheet
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "flex-end",
+            paddingTop: "2px",
+            paddingBottom: "4px",
+          }}
+        >
+          <Box sx={{ marginRight: "8px" }}>
+            <ModeToggle />
+          </Box>
+        </Sheet>
         <Sheet
           sx={{
             width: "100vw",
