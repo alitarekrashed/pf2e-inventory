@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import "@fontsource/inter";
+import Button from "@mui/joy/Button";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -8,9 +10,9 @@ function App() {
     <>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button variant="soft" onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
