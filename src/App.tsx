@@ -1,15 +1,12 @@
-import { useState } from "react";
 import "./App.css";
 import "@fontsource/inter";
-import Button from "@mui/joy/Button";
 import { CssVarsProvider } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import ModeToggle from "./components/DarkModeToggle";
 import { Box } from "@mui/system";
+import Inventory from "./components/Inventory";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <CssVarsProvider>
@@ -31,17 +28,12 @@ function App() {
             width: "100vw",
             height: "100vh",
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Button
-            sx={{ marginLeft: 0 }}
-            variant="solid"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            count is {count}
-          </Button>
+          <Box sx={{ px: "8px" }}>
+            <Inventory />
+          </Box>
         </Sheet>
       </CssVarsProvider>
     </>
