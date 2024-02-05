@@ -1,10 +1,10 @@
-import "./App.css";
-import "@fontsource/inter";
-import { CssVarsProvider } from "@mui/joy/styles";
-import Sheet from "@mui/joy/Sheet";
-import ModeToggle from "./components/DarkModeToggle";
-import { Box } from "@mui/system";
-import Inventory from "./components/grid/Inventory";
+import "./App.css"
+import "@fontsource/inter"
+import { CssVarsProvider } from "@mui/joy/styles"
+import Sheet from "@mui/joy/Sheet"
+import ModeToggle from "./components/dark-mode-toggle.component"
+import { Box } from "@mui/system"
+import Inventory from "./components/grid/inventory.component"
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
         </Sheet>
       </CssVarsProvider>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
