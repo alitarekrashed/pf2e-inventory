@@ -1,7 +1,6 @@
 import { Sheet, Table } from "@mui/joy"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
-import React from "react"
 
 const CANDLE: Equipment = {
   name: "candle",
