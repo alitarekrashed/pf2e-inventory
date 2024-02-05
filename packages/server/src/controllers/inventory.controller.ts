@@ -34,3 +34,8 @@ const rows: Equipment[] = [CANDLE, TRAITORS_RING]
 export const getInventory = async (req: Request, res: Response, next: NextFunction) => {
   return res.send(rows)
 }
+
+export const addItem = async (req: Request, res: Response, next: NextFunction) => {
+  rows.push(CANDLE)
+  return res.send(rows)
+}

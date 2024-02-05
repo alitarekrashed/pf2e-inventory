@@ -1,8 +1,8 @@
-import { Sheet, Table } from "@mui/joy"
+import { Button, Sheet, Table } from "@mui/joy"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
-import { getInventory } from "../../services/inventory.service"
+import { addItem, getInventory } from "../../services/inventory.service"
 
 export default function Inventory() {
   const [inventory, setInventory] = useState<Equipment[]>([])
@@ -16,6 +16,7 @@ export default function Inventory() {
   return (
     <>
       <Sheet>
+        <Button onClick={() => addItem()}>Add</Button>
         <Table variant="outlined">
           <caption>Inventory</caption>
           <thead>
@@ -27,8 +28,8 @@ export default function Inventory() {
             </tr>
           </thead>
           <tbody>
-            {inventory.map((row) => (
-              <tr key={row.name}>
+            {inventory.map((row, idx) => (
+              <tr key={`${row.name}-${idx}`}>
                 <td>{row.name}</td>
                 <td>{row.level}</td>
                 <td>{row.bulk}</td>
