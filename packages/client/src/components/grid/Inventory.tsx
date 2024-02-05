@@ -1,6 +1,7 @@
-import { Sheet, Table } from "@mui/joy";
-import { Equipment } from "../../models/Equipment";
-import PriceDisplay from "./cells/PriceDisplay";
+import { Sheet, Table } from "@mui/joy"
+import PriceDisplay from "./cells/PriceDisplay"
+import { Equipment } from "@pf2e-inventory/shared"
+import React from "react"
 
 const CANDLE: Equipment = {
   name: "candle",
@@ -8,7 +9,7 @@ const CANDLE: Equipment = {
   description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
   price: [{ value: 1, type: "cp" }],
   hands: "1",
-};
+}
 
 const TRAITORS_RING: Equipment = {
   name: "traitor's ring",
@@ -28,9 +29,9 @@ const TRAITORS_RING: Equipment = {
     },
   ],
   rarity: "uncommon",
-};
+}
 
-const rows: Equipment[] = [CANDLE, TRAITORS_RING];
+const rows: Equipment[] = [CANDLE, TRAITORS_RING]
 
 export default function Inventory() {
   return (
@@ -61,5 +62,5 @@ export default function Inventory() {
         </Table>
       </Sheet>
     </>
-  );
+  )
 }

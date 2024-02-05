@@ -1,0 +1,19 @@
+{
+  "name": "pf2e-inventory",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc --build --verbose",
+    "dev:client": "npm run dev -w @pf2e-inventory/client"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "ts-node": "^10.9.2"
+  }
+}

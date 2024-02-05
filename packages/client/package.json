@@ -1,5 +1,5 @@
 {
-  "name": "pf2e-inventory",
+  "name": "@pf2e-inventory/client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^5.0.16",
     "@mui/joy": "^5.0.0-beta.25",
+    "@pf2e-inventory/shared": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1"

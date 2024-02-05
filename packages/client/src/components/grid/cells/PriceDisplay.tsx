@@ -1,8 +1,7 @@
-import React from "react";
-import { Coinage } from "../../../models/Coinage";
+import { Coinage } from "@pf2e-inventory/shared"
+import React from "react"
 
 export default function PriceDisplay({ price }: { price: Coinage[] }) {
-  console.log(price);
   return (
     <>
       {price.map((coin: Coinage, index: number) => (
@@ -12,5 +11,5 @@ export default function PriceDisplay({ price }: { price: Coinage[] }) {
         </React.Fragment>
       ))}
     </>
-  );
+  )
 }
