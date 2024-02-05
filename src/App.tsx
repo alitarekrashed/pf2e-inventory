@@ -4,7 +4,7 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import Sheet from "@mui/joy/Sheet";
 import ModeToggle from "./components/DarkModeToggle";
 import { Box } from "@mui/system";
-import Inventory from "./components/Inventory";
+import Inventory from "./components/grid/Inventory";
 
 function App() {
   return (
