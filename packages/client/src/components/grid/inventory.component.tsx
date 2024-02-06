@@ -2,16 +2,30 @@ import { Button, Sheet, Table } from "@mui/joy"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
-import { addItem, getInventory } from "../../services/inventory.service"
+import { addItem } from "../../services/inventory.service"
+import useWebSocket, { ReadyState } from "react-use-websocket"
+
+const WS_URL = "ws://localhost:3000/ws/inventory"
 
 export default function Inventory() {
   const [inventory, setInventory] = useState<Equipment[]>([])
+  const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL, {
+    share: false,
+    shouldReconnect: () => true,
+  })
 
   useEffect(() => {
-    getInventory().then((value) => {
-      setInventory(value)
-    })
-  }, [])
+    if (readyState === ReadyState.OPEN) {
+      sendJsonMessage({ command: "GET_INVENTORY" })
+    }
+  }, [readyState])
+
+  // Run when a new WebSocket message is received (lastJsonMessage)
+  useEffect(() => {
+    if (lastJsonMessage) {
+      setInventory(lastJsonMessage as Equipment[])
+    }
+  }, [lastJsonMessage])
 
   return (
     <>

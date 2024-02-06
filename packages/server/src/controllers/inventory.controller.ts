@@ -39,3 +39,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   rows.push(CANDLE)
   return res.send(rows)
 }
+
+export const getInventoryWebSocket = () => {
+  return JSON.stringify(rows)
+}

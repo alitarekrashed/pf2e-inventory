@@ -1,9 +1,12 @@
-import express, { Express, Request, Response } from "express"
+import express, { Express } from "express"
 import routes from "./routes/index"
+import { mountRouter } from "./routes/ws-inventory"
 
 const app: Express = express()
-
 app.use(express.json())
+require("express-ws")(app)
+
+mountRouter()
 
 const port = 3000
 
