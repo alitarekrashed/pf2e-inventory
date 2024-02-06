@@ -16,11 +16,11 @@ export default function Inventory() {
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
+      // tell the websocket to send us the current inventory
       sendJsonMessage({ command: "GET_INVENTORY" })
     }
   }, [readyState])
 
-  // Run when a new WebSocket message is received (lastJsonMessage)
   useEffect(() => {
     if (lastJsonMessage) {
       setInventory(lastJsonMessage as Equipment[])

@@ -41,8 +41,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   expressWs.getWss().clients.forEach((client: WebSocket) => {
     client.send(getInventoryWebSocket())
   })
-
-  return res.send(rows)
+  res.send()
 }
 
 export const getInventoryWebSocket = () => {
