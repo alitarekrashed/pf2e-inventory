@@ -4,7 +4,7 @@ import { mountRouter } from "./routes/ws-inventory"
 
 const app: Express = express()
 app.use(express.json())
-require("express-ws")(app)
+export const expressWs = require("express-ws")(app)
 
 mountRouter()
 

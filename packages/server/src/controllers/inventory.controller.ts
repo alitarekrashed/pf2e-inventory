@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { Equipment } from "@pf2e-inventory/shared"
+import { expressWs } from "../app"
 
 const CANDLE: Equipment = {
   name: "candle",
@@ -37,6 +38,10 @@ export const getInventory = async (req: Request, res: Response, next: NextFuncti
 
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
   rows.push(CANDLE)
+  expressWs.getWss().clients.forEach((client: WebSocket) => {
+    client.send(getInventoryWebSocket())
+  })
+
   return res.send(rows)
 }
 

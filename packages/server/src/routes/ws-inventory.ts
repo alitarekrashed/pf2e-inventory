@@ -4,7 +4,7 @@ import { getInventoryWebSocket } from "../controllers/inventory.controller"
 
 const router = express.Router() as expressWs.Router
 
-export const mountRouter = () => {
+export const mountRouter: () => expressWs.Router = () => {
   router.ws("/inventory", (ws, req) => {
     ws.on("message", (msg: string) => {
       const object = JSON.parse(msg)
@@ -13,6 +13,7 @@ export const mountRouter = () => {
       }
     })
   })
+  return router
 }
 
 export default router
