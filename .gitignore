@@ -25,3 +25,4 @@ dist-ssr
 
 # Vite
 frontend/.vite/*
+**/*.tsbuildinfo
