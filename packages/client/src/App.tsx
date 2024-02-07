@@ -11,7 +11,7 @@ import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/materia
 import React from "react"
 
 function App() {
-  const [mode, setMode] = React.useState<"light" | "dark">("light")
+  const [mode, setMode] = React.useState<"light" | "dark">("dark")
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
