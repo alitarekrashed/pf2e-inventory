@@ -18,6 +18,15 @@ export default function AddItemModal() {
     getItems().then((val) => setItems(val))
   }, [])
 
+  /**
+   * TODO
+   * 1. allow item to be selected
+   * 2. selected item is passed to 'addItem'
+   * 3. submit button is disabled before any item is selected
+   * 4. selecting an item shows more data about it
+   * 5. items should have db ids, and those should be used as keys
+   * 6. is there anything that should be extracted into a component?
+   */
   return (
     <React.Fragment>
       <Button variant="outlined" color="neutral" startDecorator={<FaPlus />} onClick={() => setOpen(true)}>
