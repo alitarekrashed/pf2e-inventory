@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import { Equipment } from "@pf2e-inventory/shared"
 import React from "react"
 import { getItems } from "../services/items.service"
+import { addItem } from "../services/inventory.service"
 
 export default function AddItemModal() {
   const [open, setOpen] = useState<boolean>(false)
@@ -28,6 +29,13 @@ export default function AddItemModal() {
           <form
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault()
+              addItem({
+                name: "candle",
+                level: 0,
+                description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
+                price: [{ value: 1, type: "cp" }],
+                hands: "1",
+              })
               setOpen(false)
             }}
           >
