@@ -43,7 +43,7 @@ export default function AddItemDrawer() {
       <React.Fragment>
         <Button onClick={toggleDrawer(true)}>Add item</Button>
         <Drawer anchor={anchor} open={state} onClose={toggleDrawer(false)}>
-          <Box sx={{ width: 250, p: 2 }} role="presentation">
+          <Box sx={{ width: 350, p: 2 }} role="presentation">
             <List dense={true}>
               {items.map((item) => (
                 <EquipmentListItem key={item.name} value={item} />
