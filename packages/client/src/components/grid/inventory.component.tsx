@@ -1,8 +1,9 @@
-import { Container, Table } from "@mui/material"
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
+import Paper from "@mui/material/Paper"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
@@ -29,29 +30,33 @@ export default function Inventory() {
   return (
     <>
       <Container>
-        <Table>
-          <caption>Inventory</caption>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th style={{ width: "64px" }}>Level</th>
-              <th style={{ width: "64px" }}>Bulk</th>
-              <th style={{ width: "64px" }}>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {inventory.map((row, idx) => (
-              <tr key={`${row.name}-${idx}`}>
-                <td>{row.name}</td>
-                <td>{row.level}</td>
-                <td>{row.bulk}</td>
-                <td>
-                  <PriceDisplay price={row.price} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <TableContainer component={Paper}>
+          <Typography sx={{ flex: "1 1 100%", px: "8px", pt: "8px" }} variant="h6" id="tableTitle" component="div">
+            Inventory
+          </Typography>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Level</TableCell>
+                <TableCell>Bulk</TableCell>
+                <TableCell>Value</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {inventory.map((row, idx) => (
+                <TableRow key={`${row.name}-${idx}`}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.level}</TableCell>
+                  <TableCell>{row.bulk}</TableCell>
+                  <TableCell>
+                    <PriceDisplay price={row.price} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Container>
     </>
   )
