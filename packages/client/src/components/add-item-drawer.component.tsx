@@ -35,6 +35,15 @@ const RING: Equipment = {
   rarity: "uncommon",
 }
 
+/**
+ * TODO
+ * 1. get items from backend and display them
+ * 2. items have an 'add' button
+ * 3. items can be expanded to see more details
+ * 4. items should have db ids that are used as keys
+ * 5. things are extracted to components as necessary
+ */
+
 export default function AddItemDrawer() {
   const [state, setState] = React.useState(false)
   const anchor: Anchor = "right"
