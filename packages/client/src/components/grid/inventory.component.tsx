@@ -31,7 +31,12 @@ export default function Inventory() {
     <>
       <Container>
         <TableContainer component={Paper}>
-          <Typography sx={{ flex: "1 1 100%", px: "8px", pt: "8px" }} variant="h6" id="tableTitle" component="div">
+          <Typography
+            sx={{ flex: "1 1 100%", px: "8px", pt: "8px", textAlign: "center" }}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
             Inventory
           </Typography>
           <Table>
