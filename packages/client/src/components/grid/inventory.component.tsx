@@ -1,8 +1,7 @@
-import { Button, Sheet, Table } from "@mui/joy"
+import { Sheet, Table } from "@mui/joy"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
-import { addItem } from "../../services/inventory.service"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
@@ -30,7 +29,6 @@ export default function Inventory() {
   return (
     <>
       <Sheet>
-        <Button onClick={() => addItem()}>Add</Button>
         <Table variant="outlined">
           <caption>Inventory</caption>
           <thead>

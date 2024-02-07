@@ -4,7 +4,7 @@ import { CssVarsProvider } from "@mui/joy/styles"
 import Sheet from "@mui/joy/Sheet"
 import ModeToggle from "./components/dark-mode-toggle.component"
 import { Box } from "@mui/system"
-import Inventory from "./components/grid/inventory.component"
+import Home from "./components/home.component"
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           }}
         >
           <Box sx={{ px: "8px" }}>
-            <Inventory />
+            <Home />
           </Box>
         </Sheet>
       </CssVarsProvider>
