@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, Divider, IconButton, ListItem, ListItemText } from "@mui/material"
+import { Box, Collapse, Divider, IconButton, ListItem, ListItemText } from "@mui/material"
 import { Equipment } from "@pf2e-inventory/shared"
 import { FaChevronDown, FaChevronUp, FaPlus } from "react-icons/fa"
 import { addItem } from "../../services/inventory.service"

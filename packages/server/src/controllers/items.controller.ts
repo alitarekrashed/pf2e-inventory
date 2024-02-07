@@ -2,6 +2,7 @@ import { Equipment } from "@pf2e-inventory/shared"
 import { NextFunction, Request, Response } from "express"
 
 const CANDLE: Equipment = {
+  id: "1",
   name: "candle",
   level: 0,
   description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
@@ -10,6 +11,7 @@ const CANDLE: Equipment = {
 }
 
 const TRAITORS_RING: Equipment = {
+  id: "2",
   name: "traitor's ring",
   level: 0,
   description:

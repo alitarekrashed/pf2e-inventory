@@ -1,6 +1,7 @@
 export type Rarity = "uncommon"
 
 export interface Equipment {
+  id: string
   name: string
   level: number
   description: string

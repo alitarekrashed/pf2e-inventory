@@ -5,7 +5,6 @@ import "@fontsource/roboto/500.css"
 import "@fontsource/roboto/700.css"
 
 import DarkModeToggle, { ColorModeContext } from "./components/dark-mode-toggle.component"
-import { Box } from "@mui/system"
 import Home from "./components/home.component"
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
 import React from "react"
