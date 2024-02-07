@@ -3,7 +3,7 @@ import Drawer from "@mui/material/Drawer"
 import { Button, List } from "@mui/material"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
-import { getItems } from "../../services/items.service"
+import { getEquipment } from "../../services/items.service"
 import React from "react"
 import EquipmentListItem from "./equipment-list-item.component"
 
@@ -22,7 +22,7 @@ export default function AddItemDrawer() {
   const anchor: Anchor = "right"
 
   useEffect(() => {
-    getItems().then((val) => setItems(val))
+    getEquipment().then((val) => setItems(val))
   }, [])
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {

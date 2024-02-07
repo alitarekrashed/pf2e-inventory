@@ -13,7 +13,13 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
         sx={{ cursor: "pointer" }}
         onClick={() => setOpen(!open)}
         secondaryAction={
-          <IconButton aria-label="add" onClick={() => addItem(value)}>
+          <IconButton
+            aria-label="add"
+            onClick={($event) => {
+              $event.stopPropagation()
+              addItem(value)
+            }}
+          >
             <FaPlus size={12} />
           </IconButton>
         }

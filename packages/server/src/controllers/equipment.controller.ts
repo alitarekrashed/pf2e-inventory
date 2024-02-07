@@ -33,6 +33,6 @@ const TRAITORS_RING: Equipment = {
 
 export const ITEMS: Equipment[] = [CANDLE, TRAITORS_RING]
 
-export const getItems = async (req: Request, res: Response, next: NextFunction) => {
+export const getEquipment = async (req: Request, res: Response, next: NextFunction) => {
   res.send(ITEMS)
 }

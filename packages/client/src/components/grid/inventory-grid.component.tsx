@@ -1,14 +1,14 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import PriceDisplay from "./cells/price-display.component"
-import { Equipment } from "@pf2e-inventory/shared"
+import { Inventory } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import Paper from "@mui/material/Paper"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
-export default function Inventory() {
-  const [inventory, setInventory] = useState<Equipment[]>([])
+export default function InventoryGrid() {
+  const [inventory, setInventory] = useState<Inventory>()
   const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL, {
     share: false,
     shouldReconnect: () => true,
@@ -23,7 +23,7 @@ export default function Inventory() {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      setInventory(lastJsonMessage as Equipment[])
+      setInventory(lastJsonMessage as Inventory)
     }
   }, [lastJsonMessage])
 
@@ -48,16 +48,17 @@ export default function Inventory() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {inventory.map((row, idx) => (
-              <TableRow key={`${row.name}-${idx}`}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.level}</TableCell>
-                <TableCell>{row.bulk}</TableCell>
-                <TableCell>
-                  <PriceDisplay price={row.price} />
-                </TableCell>
-              </TableRow>
-            ))}
+            {inventory &&
+              inventory.items.map((row) => (
+                <TableRow key={`${row.id}`}>
+                  <TableCell>{row.item.name}</TableCell>
+                  <TableCell>{row.item.level}</TableCell>
+                  <TableCell>{row.item.bulk}</TableCell>
+                  <TableCell>
+                    <PriceDisplay price={row.item.price} />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

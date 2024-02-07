@@ -1,5 +1,22 @@
 export type Rarity = "uncommon"
 
+export interface Inventory {
+  money: {
+    platinum: number
+    gold: number
+    silver: number
+    copper: number
+  }
+  items: CharacterItem[]
+}
+
+export interface CharacterItem {
+  id: string
+  name_override?: string
+  item: Equipment
+}
+
+// todo support type?
 export interface Equipment {
   id: string
   name: string
