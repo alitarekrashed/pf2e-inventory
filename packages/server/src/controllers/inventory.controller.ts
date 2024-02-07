@@ -32,18 +32,14 @@ const TRAITORS_RING: Equipment = {
 
 const rows: Equipment[] = [CANDLE, TRAITORS_RING]
 
-export const getInventory = async (req: Request, res: Response, next: NextFunction) => {
-  return res.send(rows)
-}
-
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
   rows.push(CANDLE)
   expressWs.getWss().clients.forEach((client: WebSocket) => {
-    client.send(getInventoryWebSocket())
+    client.send(getInventory())
   })
   res.send()
 }
 
-export const getInventoryWebSocket = () => {
+export const getInventory = () => {
   return JSON.stringify(rows)
 }
