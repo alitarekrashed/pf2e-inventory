@@ -1,17 +1,21 @@
-import * as React from "react"
 import Button from "@mui/joy/Button"
-import FormControl from "@mui/joy/FormControl"
-import FormLabel from "@mui/joy/FormLabel"
-import Input from "@mui/joy/Input"
 import Modal from "@mui/joy/Modal"
 import ModalDialog from "@mui/joy/ModalDialog"
 import DialogTitle from "@mui/joy/DialogTitle"
-import DialogContent from "@mui/joy/DialogContent"
 import Stack from "@mui/joy/Stack"
 import { FaPlus } from "react-icons/fa"
+import { useEffect, useState } from "react"
+import { Equipment } from "@pf2e-inventory/shared"
+import React from "react"
+import { getItems } from "../services/items.service"
 
 export default function AddItemModal() {
-  const [open, setOpen] = React.useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const [items, setItems] = useState<Equipment[]>([])
+
+  useEffect(() => {
+    getItems().then((val) => setItems(val))
+  }, [])
 
   return (
     <React.Fragment>
@@ -21,7 +25,6 @@ export default function AddItemModal() {
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog>
           <DialogTitle>Add an item to your inventory</DialogTitle>
-          <DialogContent>Fill in the information of the project.</DialogContent>
           <form
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault()
@@ -29,14 +32,9 @@ export default function AddItemModal() {
             }}
           >
             <Stack spacing={2}>
-              <FormControl>
-                <FormLabel>Name</FormLabel>
-                <Input autoFocus required />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Description</FormLabel>
-                <Input required />
-              </FormControl>
+              {items.map((val) => (
+                <p key={val.name}>{val.name}</p>
+              ))}
               <Button type="submit">Add</Button>
             </Stack>
           </form>
