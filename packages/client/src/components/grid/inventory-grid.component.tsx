@@ -42,6 +42,7 @@ export default function InventoryGrid() {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
+              <TableCell>Category</TableCell>
               <TableCell>Level</TableCell>
               <TableCell>Bulk</TableCell>
               <TableCell>Value</TableCell>
@@ -52,6 +53,7 @@ export default function InventoryGrid() {
               inventory.items.map((row) => (
                 <TableRow key={`${row.id}`}>
                   <TableCell>{row.item.name}</TableCell>
+                  <TableCell>{row.item.category}</TableCell>
                   <TableCell>{row.item.level}</TableCell>
                   <TableCell>{row.item.bulk}</TableCell>
                   <TableCell>

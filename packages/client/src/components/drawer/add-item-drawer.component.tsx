@@ -12,7 +12,6 @@ type Anchor = "right"
 /**
  * TODO
  * 3. expanded item shows better formatted information than just description
- * 4. items should have db ids that are used as keys
  * 5. things are extracted to components as necessary
  */
 

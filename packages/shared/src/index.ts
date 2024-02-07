@@ -1,4 +1,5 @@
 export type Rarity = "uncommon"
+export type Category = "Adventuring Gear"
 
 export interface Inventory {
   money: {
@@ -19,6 +20,7 @@ export interface CharacterItem {
 // todo support type?
 export interface Equipment {
   id: string
+  category: Category
   name: string
   level: number
   description: string

@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express"
 
 const CANDLE: Equipment = {
   id: "1",
+  category: "Adventuring Gear",
   name: "candle",
   level: 0,
   description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
@@ -12,6 +13,7 @@ const CANDLE: Equipment = {
 
 const TRAITORS_RING: Equipment = {
   id: "2",
+  category: "Adventuring Gear",
   name: "traitor's ring",
   level: 0,
   description:
