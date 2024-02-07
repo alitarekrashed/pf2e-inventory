@@ -1,20 +1,16 @@
-import { Collapse, IconButton, TableCell, TableRow } from "@mui/material"
+import { TableCell, TableRow } from "@mui/material"
 import { CharacterItem } from "@pf2e-inventory/shared"
 import PriceDisplay from "./cells/price-display.component"
+import InventoryItemDrawer from "./inventory-item-drawer.component"
 import { useState } from "react"
-import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 
 export default function InventoryGridRow({ value }: { value: CharacterItem }) {
-  const [open, setOpen] = useState<boolean>(false)
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   return (
     <>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
-          <IconButton size="small" onClick={() => setOpen(!open)}>
-            {open ? <FaChevronUp /> : <FaChevronDown />}
-          </IconButton>
-        </TableCell>
+      <TableRow onClick={() => setDrawerOpen(true)}>
+        <TableCell></TableCell>
         <TableCell>{value.item.name}</TableCell>
         <TableCell>{value.item.category}</TableCell>
         <TableCell>{value.item.level}</TableCell>
@@ -23,13 +19,7 @@ export default function InventoryGridRow({ value }: { value: CharacterItem }) {
           <PriceDisplay price={value.item.price} />
         </TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} unmountOnExit>
-            {value.item.description}
-          </Collapse>
-        </TableCell>
-      </TableRow>
+      <InventoryItemDrawer value={value} isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
     </>
   )
 }
