@@ -36,28 +36,10 @@ function App() {
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Container sx={{ width: "100vw", height: "100vh" }}>
-            <Container
-              sx={{
-                display: "flex",
-                justifyContent: "flex-end",
-                paddingTop: "2px",
-                paddingBottom: "4px",
-              }}
-            >
-              <DarkModeToggle />
-            </Container>
-            <Container
-              sx={{
-                width: "100vw",
-                height: "100vh",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ px: "8px", width: "100%", height: "100%" }}>
-                <Home />
-              </Box>
+          <Container maxWidth={"xl"}>
+            <DarkModeToggle />
+            <Container maxWidth={"xl"}>
+              <Home />
             </Container>
           </Container>
         </ThemeProvider>

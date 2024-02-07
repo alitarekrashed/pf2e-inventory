@@ -15,15 +15,14 @@ export default function DarkModeToggle() {
         display: "flex",
         width: "100%",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         bgcolor: "background.default",
         color: "text.primary",
         borderRadius: 1,
         p: 3,
       }}
     >
-      {theme.palette.mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+      <IconButton sx={{ ml: 1, border: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
         {theme.palette.mode === "dark" ? <FaSun /> : <FaMoon />}
       </IconButton>
     </Box>

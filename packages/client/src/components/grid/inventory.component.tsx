@@ -29,40 +29,38 @@ export default function Inventory() {
 
   return (
     <>
-      <Container>
-        <TableContainer component={Paper}>
-          <Typography
-            sx={{ flex: "1 1 100%", px: "8px", pt: "8px", textAlign: "center" }}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
-            Inventory
-          </Typography>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Level</TableCell>
-                <TableCell>Bulk</TableCell>
-                <TableCell>Value</TableCell>
+      <TableContainer component={Paper}>
+        <Typography
+          sx={{ flex: "1 1 100%", px: "8px", pt: "8px", textAlign: "center" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Inventory
+        </Typography>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Level</TableCell>
+              <TableCell>Bulk</TableCell>
+              <TableCell>Value</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {inventory.map((row, idx) => (
+              <TableRow key={`${row.name}-${idx}`}>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.level}</TableCell>
+                <TableCell>{row.bulk}</TableCell>
+                <TableCell>
+                  <PriceDisplay price={row.price} />
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {inventory.map((row, idx) => (
-                <TableRow key={`${row.name}-${idx}`}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.level}</TableCell>
-                  <TableCell>{row.bulk}</TableCell>
-                  <TableCell>
-                    <PriceDisplay price={row.price} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Container>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   )
 }
