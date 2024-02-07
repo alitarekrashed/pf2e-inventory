@@ -9,12 +9,6 @@ import EquipmentListItem from "./equipment-list-item.component"
 
 type Anchor = "right"
 
-/**
- * TODO
- * 3. expanded item shows better formatted information than just description
- * 5. things are extracted to components as necessary
- */
-
 export default function AddItemDrawer() {
   const [state, setState] = useState<boolean>(false)
   const [items, setItems] = useState<Equipment[]>([])
