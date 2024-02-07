@@ -1,9 +1,9 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import PriceDisplay from "./cells/price-display.component"
 import { Inventory } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import Paper from "@mui/material/Paper"
+import InventoryGridRow from "./inventory-grid-row.component"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
@@ -49,18 +49,7 @@ export default function InventoryGrid() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {inventory &&
-              inventory.items.map((row) => (
-                <TableRow key={`${row.id}`}>
-                  <TableCell>{row.item.name}</TableCell>
-                  <TableCell>{row.item.category}</TableCell>
-                  <TableCell>{row.item.level}</TableCell>
-                  <TableCell>{row.item.bulk}</TableCell>
-                  <TableCell>
-                    <PriceDisplay price={row.item.price} />
-                  </TableCell>
-                </TableRow>
-              ))}
+            {inventory && inventory.items.map((row) => <InventoryGridRow key={`${row.id}`} value={row} />)}
           </TableBody>
         </Table>
       </TableContainer>
