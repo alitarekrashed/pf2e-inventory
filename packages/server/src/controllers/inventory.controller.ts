@@ -26,6 +26,17 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   res.send()
 }
 
+export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
+  const id: string = req.params.id
+  const index = inventory.items.findIndex((value) => value.id === id)
+  inventory.items.splice(index, 1)
+
+  expressWs.getWss().clients.forEach((client: WebSocket) => {
+    client.send(getInventory())
+  })
+  res.send()
+}
+
 export const getInventory = () => {
   return JSON.stringify(inventory)
 }
