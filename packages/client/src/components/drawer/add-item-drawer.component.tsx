@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { getItems } from "../../services/items.service"
 import React from "react"
 import { FaPlus } from "react-icons/fa"
+import EquipmentListItem from "./equipment-list-item.component"
 
 type Anchor = "right"
 
@@ -37,10 +38,6 @@ export default function AddItemDrawer() {
     setState(open)
   }
 
-  const add = (val: Equipment) => {
-    addItem(val)
-  }
-
   return (
     <div>
       <React.Fragment>
@@ -49,17 +46,7 @@ export default function AddItemDrawer() {
           <Box sx={{ width: 250, p: 2 }} role="presentation">
             <List dense={true}>
               {items.map((item) => (
-                <ListItem
-                  key={item.name}
-                  divider={true}
-                  secondaryAction={
-                    <IconButton aria-label="Add" onClick={() => add(item)}>
-                      <FaPlus size={12} />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText primary={item.name} />
-                </ListItem>
+                <EquipmentListItem key={item.name} value={item} />
               ))}
             </List>
           </Box>
