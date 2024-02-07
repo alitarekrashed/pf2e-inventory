@@ -1,4 +1,4 @@
-import { Sheet, Table } from "@mui/joy"
+import { Container, Table } from "@mui/material"
 import PriceDisplay from "./cells/price-display.component"
 import { Equipment } from "@pf2e-inventory/shared"
 import { useEffect, useState } from "react"
@@ -28,8 +28,8 @@ export default function Inventory() {
 
   return (
     <>
-      <Sheet>
-        <Table variant="outlined">
+      <Container>
+        <Table>
           <caption>Inventory</caption>
           <thead>
             <tr>
@@ -52,7 +52,7 @@ export default function Inventory() {
             ))}
           </tbody>
         </Table>
-      </Sheet>
+      </Container>
     </>
   )
 }

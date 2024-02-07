@@ -1,30 +1,31 @@
-import Button from "@mui/joy/Button";
-import { useColorScheme } from "@mui/joy/styles";
-import React from "react";
-import { FaSun } from "react-icons/fa";
-import { FaMoon } from "react-icons/fa";
+import { Box, IconButton } from "@mui/material"
+import { useTheme } from "@mui/material/styles"
+import React from "react"
+import { FaSun } from "react-icons/fa"
+import { FaMoon } from "react-icons/fa"
 
-export default function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} })
 
-  // necessary for server-side rendering
-  // because mode is undefined on the server
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return null;
-  }
-
+export default function DarkModeToggle() {
+  const theme = useTheme()
+  const colorMode = React.useContext(ColorModeContext)
   return (
-    <Button
-      variant="outlined"
-      onClick={() => {
-        setMode(mode === "light" ? "dark" : "light");
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        bgcolor: "background.default",
+        color: "text.primary",
+        borderRadius: 1,
+        p: 3,
       }}
     >
-      {mode === "light" ? <FaSun /> : <FaMoon />}
-    </Button>
-  );
+      {theme.palette.mode} mode
+      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+        {theme.palette.mode === "dark" ? <FaSun /> : <FaMoon />}
+      </IconButton>
+    </Box>
+  )
 }

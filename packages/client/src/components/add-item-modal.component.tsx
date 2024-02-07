@@ -1,64 +1,47 @@
-import Button from "@mui/joy/Button"
-import Modal from "@mui/joy/Modal"
-import ModalDialog from "@mui/joy/ModalDialog"
-import DialogTitle from "@mui/joy/DialogTitle"
-import Stack from "@mui/joy/Stack"
-import { FaPlus } from "react-icons/fa"
-import { useEffect, useState } from "react"
-import { Equipment } from "@pf2e-inventory/shared"
-import React from "react"
-import { getItems } from "../services/items.service"
-import { addItem } from "../services/inventory.service"
+// import { FaPlus } from "react-icons/fa"
+// import { useEffect, useState } from "react"
+// import { Equipment } from "@pf2e-inventory/shared"
+// import React from "react"
+// import { getItems } from "../services/items.service"
+// import { addItem } from "../services/inventory.service"
 
-export default function AddItemModal() {
-  const [open, setOpen] = useState<boolean>(false)
-  const [items, setItems] = useState<Equipment[]>([])
+// export default function AddItemModal() {
+//   const [open, setOpen] = useState<boolean>(false)
+//   const [items, setItems] = useState<Equipment[]>([])
 
-  useEffect(() => {
-    getItems().then((val) => setItems(val))
-  }, [])
-
-  /**
-   * TODO
-   * ----- SWITCH TO USING DRAWER over modal --- think dndbeyond type inventory management
-   * ----- consider switching to Material UI over Joy UI (more components and actively being supported)
-   * 1. allow item to be selected
-   * 2. selected item is passed to 'addItem'
-   * 3. submit button is disabled before any item is selected
-   * 4. selecting an item shows more data about it
-   * 5. items should have db ids, and those should be used as keys
-   * 6. is there anything that should be extracted into a component?
-   */
-  return (
-    <React.Fragment>
-      <Button variant="outlined" color="neutral" startDecorator={<FaPlus />} onClick={() => setOpen(true)}>
-        Add
-      </Button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <ModalDialog>
-          <DialogTitle>Add an item to your inventory</DialogTitle>
-          <form
-            onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-              event.preventDefault()
-              addItem({
-                name: "candle",
-                level: 0,
-                description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
-                price: [{ value: 1, type: "cp" }],
-                hands: "1",
-              })
-              setOpen(false)
-            }}
-          >
-            <Stack spacing={2}>
-              {items.map((val) => (
-                <p key={val.name}>{val.name}</p>
-              ))}
-              <Button type="submit">Add</Button>
-            </Stack>
-          </form>
-        </ModalDialog>
-      </Modal>
-    </React.Fragment>
-  )
-}
+//   useEffect(() => {
+//     getItems().then((val) => setItems(val))
+//   }, [])
+//   return (
+//     <React.Fragment>
+//       <Button variant="outlined" color="neutral" startDecorator={<FaPlus />} onClick={() => setOpen(true)}>
+//         Add
+//       </Button>
+//       <Modal open={open} onClose={() => setOpen(false)}>
+//         <ModalDialog>
+//           <DialogTitle>Add an item to your inventory</DialogTitle>
+//           <form
+//             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+//               event.preventDefault()
+//               addItem({
+//                 name: "candle",
+//                 level: 0,
+//                 description: "A lit candle sheds dim light in a 10-foot radius for 8 hours.",
+//                 price: [{ value: 1, type: "cp" }],
+//                 hands: "1",
+//               })
+//               setOpen(false)
+//             }}
+//           >
+//             <Stack spacing={2}>
+//               {items.map((val) => (
+//                 <p key={val.name}>{val.name}</p>
+//               ))}
+//               <Button type="submit">Add</Button>
+//             </Stack>
+//           </form>
+//         </ModalDialog>
+//       </Modal>
+//     </React.Fragment>
+//   )
+// }
