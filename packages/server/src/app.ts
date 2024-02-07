@@ -5,10 +5,13 @@ import { mountRouter } from "./routes/ws-inventory"
 const app: Express = express()
 app.use(express.json())
 export const expressWs = require("express-ws")(app)
+const cors = require("cors")
 
 mountRouter()
 
 const port = 3000
+
+app.use(cors())
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
