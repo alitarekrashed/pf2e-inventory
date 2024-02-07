@@ -32,7 +32,9 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
           }
         />
       </ListItem>
-      <Collapse in={open}>{value.description}</Collapse>
+      <Collapse in={open} unmountOnExit>
+        {value.description}
+      </Collapse>
       <Divider />
     </>
   )

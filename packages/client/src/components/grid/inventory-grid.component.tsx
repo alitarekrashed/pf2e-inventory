@@ -41,6 +41,7 @@ export default function InventoryGrid() {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell />
               <TableCell>Name</TableCell>
               <TableCell>Category</TableCell>
               <TableCell>Level</TableCell>
