@@ -20,6 +20,8 @@ export default function AddItemModal() {
 
   /**
    * TODO
+   * ----- SWITCH TO USING DRAWER over modal --- think dndbeyond type inventory management
+   * ----- consider switching to Material UI over Joy UI (more components and actively being supported)
    * 1. allow item to be selected
    * 2. selected item is passed to 'addItem'
    * 3. submit button is disabled before any item is selected
