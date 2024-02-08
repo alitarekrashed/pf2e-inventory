@@ -2,9 +2,10 @@ import { Button, Card, CardContent, CardHeader, Paper, Typography } from "@mui/m
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import { CharacterItem } from "@pf2e-inventory/shared"
-import React from "react"
+import React, { useContext } from "react"
 import { deleteItem } from "../../services/inventory.service"
 import EquipmentDetails from "../equipment-details.component"
+import { InventoryContext } from "../../lib/inventory.context"
 
 type Anchor = "right"
 
@@ -18,6 +19,7 @@ export default function InventoryItemDrawer({
   onClose: () => void
 }) {
   const anchor: Anchor = "right"
+  const inventoryId: string = useContext(InventoryContext)
 
   return (
     <React.Fragment>
@@ -44,7 +46,7 @@ export default function InventoryItemDrawer({
             <Button
               sx={{ width: "min-content", pb: "10" }}
               onClick={() => {
-                deleteItem("1", value.id)
+                deleteItem(inventoryId, value.id)
                 onClose()
               }}
             >

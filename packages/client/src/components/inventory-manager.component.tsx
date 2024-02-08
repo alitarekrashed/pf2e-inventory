@@ -3,6 +3,7 @@ import AddItemDrawer from "./drawer/add-item-drawer.component"
 import InventoryGrid from "./grid/inventory-grid.component"
 import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
+import { InventoryContext } from "../lib/inventory.context"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
@@ -28,10 +29,13 @@ export default function InventoryManager() {
   }, [lastJsonMessage])
 
   return (
+    // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
       <>
-        <AddItemDrawer />
-        <InventoryGrid inventory={inventory} />
+        <InventoryContext.Provider value={inventory.id}>
+          <AddItemDrawer />
+          <InventoryGrid inventory={inventory} />
+        </InventoryContext.Provider>
       </>
     )
   )

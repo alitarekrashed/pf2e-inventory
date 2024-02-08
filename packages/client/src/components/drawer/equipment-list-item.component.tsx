@@ -2,11 +2,13 @@ import { Box, Collapse, Divider, IconButton, ListItem, ListItemText } from "@mui
 import { Equipment } from "@pf2e-inventory/shared"
 import { FaChevronDown, FaChevronUp, FaPlus } from "react-icons/fa"
 import { addItem } from "../../services/inventory.service"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import EquipmentDetails from "../equipment-details.component"
+import { InventoryContext } from "../../lib/inventory.context"
 
 export default function EquipmentListItem({ value }: { value: Equipment }) {
   const [open, setOpen] = useState<boolean>(false)
+  const inventoryId: string = useContext(InventoryContext)
 
   return (
     <>
@@ -18,7 +20,7 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
             aria-label="add"
             onClick={($event) => {
               $event.stopPropagation()
-              addItem("1", value)
+              addItem(inventoryId, value)
             }}
           >
             <FaPlus size={12} />
