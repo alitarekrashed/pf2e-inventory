@@ -55,7 +55,7 @@ export default function InventoryItemDrawer({
                 <Typography sx={{ fontSize: 14 }}>{value.item.description}</Typography>
               </CardContent>
             </Card>
-            <Box>
+            <Box width="100%" textAlign="center" marginTop={4}>
               <MoveItemButtonGroup itemId={value.id} />
             </Box>
           </Box>
