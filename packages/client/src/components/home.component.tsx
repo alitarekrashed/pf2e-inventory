@@ -1,11 +1,5 @@
-import AddItemDrawer from "./drawer/add-item-drawer.component"
-import InventoryGrid from "./grid/inventory-grid.component"
+import InventoryManager from "./inventory-manager.component"
 
 export default function Home() {
-  return (
-    <>
-      <AddItemDrawer />
-      <InventoryGrid />
-    </>
-  )
+  return <InventoryManager />
 }

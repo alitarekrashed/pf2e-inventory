@@ -1,7 +1,9 @@
 export type Rarity = "uncommon"
 export type Category = "Adventuring Gear"
+export type InventoryType = "Party" | "Character"
 
-export interface Inventory {
+export interface PartyInventory {
+  id: string
   money: {
     platinum: number
     gold: number
@@ -9,6 +11,27 @@ export interface Inventory {
     copper: number
   }
   items: CharacterItem[]
+  party: {
+    name: string
+    inventory_ids: string[]
+  }
+  type: "Party"
+}
+
+export interface Inventory {
+  id: string
+  money: {
+    platinum: number
+    gold: number
+    silver: number
+    copper: number
+  }
+  items: CharacterItem[]
+  character: {
+    name: string
+    party_inventory_id: string
+  }
+  type: "Character"
 }
 
 export interface CharacterItem {
@@ -17,7 +40,6 @@ export interface CharacterItem {
   item: Equipment
 }
 
-// todo support type?
 export interface Equipment {
   id: string
   category: Category
@@ -25,7 +47,7 @@ export interface Equipment {
   level: number
   description: string
   price: Coinage[]
-  bulk?: string
+  bulk?: number | string
   rarity?: Rarity
   access?: string
   usage?: string

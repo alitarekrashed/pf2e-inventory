@@ -3,6 +3,7 @@ import { Inventory } from "@pf2e-inventory/shared"
 import { expressWs } from "../app"
 
 const inventory: Inventory = {
+  id: "1",
   money: {
     platinum: 0,
     gold: 0,
@@ -10,6 +11,11 @@ const inventory: Inventory = {
     copper: 0,
   },
   items: [],
+  character: {
+    name: "Vakarai",
+    party_inventory_id: "",
+  },
+  type: "Character",
 }
 
 // TODO eventually there needs to be a distinction between Equipment (Pathfinder rule item) and CharacterItem (item on character)
