@@ -1,11 +1,25 @@
-import { Button, Card, CardContent, CardHeader, Paper, Typography } from "@mui/material"
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardContent,
+  CardHeader,
+  ClickAwayListener,
+  Grow,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  Typography,
+} from "@mui/material"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import { CharacterItem } from "@pf2e-inventory/shared"
-import React, { useContext } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { deleteItem, moveItem } from "../../services/inventory.service"
 import EquipmentDetails from "../equipment-details.component"
 import { InventoryContext } from "../../lib/inventory.context"
+import { FaArrowDown, FaChevronDown } from "react-icons/fa"
 
 type Anchor = "right"
 
@@ -42,7 +56,7 @@ export default function InventoryItemDrawer({
               </CardContent>
             </Card>
             <Box>
-              <Button onClick={() => moveItem(inventoryContext.id, value.id, inventoryContext.related[0])}>Move</Button>
+              <MoveItemButtonGroup itemId={value.id} />
             </Box>
           </Box>
           <Paper elevation={3} sx={{ position: "absolute", bottom: 0, width: "100%" }}>
@@ -59,5 +73,73 @@ export default function InventoryItemDrawer({
         </Box>
       </Drawer>
     </React.Fragment>
+  )
+}
+
+function MoveItemButtonGroup({ itemId }: { itemId: string }) {
+  const inventoryContext = useContext(InventoryContext)
+  const [open, setOpen] = useState(false)
+  const anchorRef = useRef<HTMLDivElement>(null)
+
+  const options = inventoryContext.related.filter((val) => val.id !== inventoryContext.id)
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen)
+  }
+
+  const handleClick = (event: any, index: number) => {
+    moveItem(inventoryContext.id, itemId, options[index].id)
+    setOpen(false)
+  }
+
+  const handleClose = (event: Event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+      return
+    }
+
+    setOpen(false)
+  }
+
+  return (
+    <>
+      <ButtonGroup ref={anchorRef} variant="contained">
+        <Button size="small" onClick={handleToggle}>
+          <Box component={"span"} marginRight={1}>
+            Move
+          </Box>
+          <FaChevronDown />
+        </Button>
+      </ButtonGroup>
+      <Popper
+        sx={{
+          zIndex: 1,
+        }}
+        open={open}
+        anchorEl={anchorRef.current}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin: placement === "bottom" ? "center top" : "center bottom",
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList id="split-button-menu" autoFocusItem>
+                  {options.map((option, index) => (
+                    <MenuItem key={option.id} onClick={(event) => handleClick(event, index)}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </>
   )
 }

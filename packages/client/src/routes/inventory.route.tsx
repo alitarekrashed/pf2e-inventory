@@ -1,28 +1,47 @@
 import { Grid } from "@mui/material"
 import InventoryManager from "../components/inventory-manager.component"
 import { useLoaderData } from "react-router-dom"
-import { getInventory } from "../services/inventory.service"
+import { getInventories, getInventory } from "../services/inventory.service"
+import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
 
-export async function loader({ params }: { params: any }) {
-  const inventory = await getInventory(params.inventoryId)
+interface InventoryLoaderData {
+  inventoryId: string
+  isCharacter: boolean
+  partyId: string
+  linkedInventories: { id: string; name: string }[]
+}
 
-  const data = {
-    inventoryId: params.inventoryId,
-    partyId: inventory.type === "Character" ? inventory.character.party_inventory_id : undefined,
+export async function loader({ params }: { params: any }): Promise<InventoryLoaderData> {
+  const inventoryId = params.inventoryId
+  const inventory = await getInventory(inventoryId)
+  const isCharacter: boolean = inventory.type === "Character"
+  const partyId = inventory.type === "Character" ? inventory.character.party_inventory_id : inventory.id
+  const linkedInventories: { id: string; name: string }[] = []
+
+  if (isCharacter) {
+    const party: PartyInventory = (await getInventory(partyId)) as PartyInventory
+    const relatedInventories: Inventory[] = (await getInventories(party.party.inventory_ids)) as Inventory[]
+    relatedInventories.forEach((val) => linkedInventories.push({ id: val.id, name: val.character.name }))
+    linkedInventories.push({ id: party.id, name: party.party.name })
+  } else {
+    const relatedInventories: Inventory[] = (await getInventories(
+      (inventory as PartyInventory).party.inventory_ids,
+    )) as Inventory[]
+    relatedInventories.forEach((val) => linkedInventories.push({ id: val.id, name: val.character.name }))
   }
 
-  return data
+  return { inventoryId, isCharacter, partyId, linkedInventories }
 }
 
 export default function InventoryRoute() {
-  const data = useLoaderData() as { inventoryId: string; partyId: string | undefined }
+  const data = useLoaderData() as InventoryLoaderData
   return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
-        {data.partyId && <InventoryManager id={data.partyId} />}
+        {data.isCharacter && <InventoryManager id={data.partyId} linked={data.linkedInventories} />}
       </Grid>
       <Grid item xs={6}>
-        <InventoryManager id={data.inventoryId} />
+        <InventoryManager id={data.inventoryId} linked={data.linkedInventories} />
       </Grid>
     </Grid>
   )

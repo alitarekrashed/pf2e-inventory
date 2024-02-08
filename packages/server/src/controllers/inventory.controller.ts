@@ -30,7 +30,7 @@ const inventories: (Inventory | PartyInventory)[] = [
     items: [],
     party: {
       name: "Pirates",
-      inventory_ids: ["1", "2"],
+      inventory_ids: ["1", "3"],
     },
     type: "Party",
   },
@@ -59,6 +59,21 @@ export const fetchInventory = async (req: Request, res: Response, next: NextFunc
   const inventoryId: string = req.params.id
   const value = findInventory(inventoryId)
   res.send(value)
+}
+
+export const fetchInventories = async (req: Request, res: Response, next: NextFunction) => {
+  const ids = req.query.id
+  let result: (Inventory | PartyInventory | undefined)[] = []
+
+  if (ids) {
+    if (Array.isArray(ids)) {
+      result = ids.map((id) => findInventory(id as string))
+    } else {
+      result = [findInventory(ids as string)]
+    }
+  }
+
+  res.send(result)
 }
 
 // TODO eventually there needs to be a distinction between Equipment (Pathfinder rule item) and CharacterItem (item on character)

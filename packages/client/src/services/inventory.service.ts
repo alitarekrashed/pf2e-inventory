@@ -1,6 +1,21 @@
 import { Equipment, Inventory, MoveItemRequest, PartyInventory } from "@pf2e-inventory/shared"
 import axios from "axios"
 
+export async function getInventories(ids: string[]): Promise<(Inventory | PartyInventory)[]> {
+  const params = new URLSearchParams()
+  ids.forEach((id) => params.append("id", id))
+
+  return (
+    await axios.get<(Inventory | PartyInventory)[]>(`http://localhost:3000/inventory/`, {
+      params: params,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+  ).data
+}
+
 export async function getInventory(id: string): Promise<Inventory | PartyInventory> {
   return (
     await axios.get<Inventory | PartyInventory>(`http://localhost:3000/inventory/${id}`, {

@@ -9,7 +9,7 @@ import MoneyDisplay from "./money-display.component"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
-export default function InventoryManager({ id }: { id: string }) {
+export default function InventoryManager({ id, linked }: { id: string; linked: { id: string; name: string }[] }) {
   const [inventory, setInventory] = useState<Inventory | PartyInventory>()
 
   const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL + `/${id}`, {
@@ -51,7 +51,7 @@ export default function InventoryManager({ id }: { id: string }) {
     // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
       <>
-        <InventoryContext.Provider value={{ id: id, related: getRelatedIds() }}>
+        <InventoryContext.Provider value={{ id: id, related: linked }}>
           <Box sx={{ display: "flex", px: "8px", pt: "8px", alignItems: "center", textAlign: "center" }}>
             <MoneyDisplay money={inventory.money} />
             <Typography variant="h6" sx={{ flex: "1 1 auto" }}>
