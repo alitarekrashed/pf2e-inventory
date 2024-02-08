@@ -105,7 +105,7 @@ function MoveItemButtonGroup({ itemId }: { itemId: string }) {
       <ButtonGroup ref={anchorRef} variant="contained">
         <Button size="small" onClick={handleToggle}>
           <Box component={"span"} marginRight={1}>
-            Move
+            Send to
           </Box>
           <FaChevronDown />
         </Button>
