@@ -1,10 +1,10 @@
-import { Button, Card, CardContent, CardHeader, IconButton, Paper, Typography } from "@mui/material"
+import { Button, Card, CardContent, CardHeader, Paper, Typography } from "@mui/material"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import { CharacterItem } from "@pf2e-inventory/shared"
 import React from "react"
 import { deleteItem } from "../../services/inventory.service"
-import { FaTrash } from "react-icons/fa"
+import EquipmentDetails from "../equipment-details.component"
 
 type Anchor = "right"
 
@@ -25,13 +25,17 @@ export default function InventoryItemDrawer({
         <Box sx={{ width: 350, height: "100%", display: "flex", flexDirection: "column" }} role="presentation">
           <Box sx={{ flex: "1 1 auto", p: 2 }}>
             <Card>
+              <CardHeader
+                title={value.item.name}
+                subheader={
+                  <>
+                    {value.item.category} {value.item.level}
+                  </>
+                }
+                sx={{ paddingBottom: 0 }}
+              />
               <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  {value.item.name}
-                </Typography>
-                <Typography sx={{ fontSize: 12 }} color="text.secondary">
-                  Level: {value.item.level}
-                </Typography>
+                <EquipmentDetails value={value.item} />
                 <Typography sx={{ fontSize: 14 }}>{value.item.description}</Typography>
               </CardContent>
             </Card>

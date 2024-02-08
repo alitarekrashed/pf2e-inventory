@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "@mui/material"
 import { CharacterItem } from "@pf2e-inventory/shared"
-import PriceDisplay from "./cells/price-display.component"
+import PriceDisplay from "../price-display.component"
 import InventoryItemDrawer from "./inventory-item-drawer.component"
 import { useState } from "react"
 
