@@ -44,7 +44,7 @@ export default function InventoryItemDrawer({
             <Button
               sx={{ width: "min-content", pb: "10" }}
               onClick={() => {
-                deleteItem(value.id)
+                deleteItem("1", value.id)
                 onClose()
               }}
             >

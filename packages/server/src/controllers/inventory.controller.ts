@@ -18,31 +18,44 @@ const inventory: Inventory = {
   type: "Character",
 }
 
+const inventories: Inventory[] = [inventory]
+
+function findInventory(id: string) {
+  return inventories.find((value) => value.id === id)
+}
+
 // TODO eventually there needs to be a distinction between Equipment (Pathfinder rule item) and CharacterItem (item on character)
 // different ids, etc.
 
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
-  inventory.items.push({
+  const inventoryId: string = req.params.id
+
+  const value = findInventory(inventoryId)
+  value?.items.push({
     id: `${inventory.items.length}`,
     item: req.body,
   })
   expressWs.getWss().clients.forEach((client: WebSocket) => {
-    client.send(getInventory())
+    client.send(getInventory(inventoryId))
   })
   res.send()
 }
 
 export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
-  const id: string = req.params.id
-  const index = inventory.items.findIndex((value) => value.id === id)
-  inventory.items.splice(index, 1)
+  const inventoryId: string = req.params.id
+  const itemId: string = req.params.itemId
+
+  const value = findInventory(inventoryId)
+
+  const index = value!.items.findIndex((value) => value.id === itemId)
+  value?.items.splice(index, 1)
 
   expressWs.getWss().clients.forEach((client: WebSocket) => {
-    client.send(getInventory())
+    client.send(getInventory(inventoryId))
   })
   res.send()
 }
 
-export const getInventory = () => {
-  return JSON.stringify(inventory)
+export const getInventory = (id: string) => {
+  return JSON.stringify(findInventory(id))
 }

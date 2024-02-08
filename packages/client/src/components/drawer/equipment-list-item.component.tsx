@@ -18,7 +18,7 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
             aria-label="add"
             onClick={($event) => {
               $event.stopPropagation()
-              addItem(value)
+              addItem("1", value)
             }}
           >
             <FaPlus size={12} />

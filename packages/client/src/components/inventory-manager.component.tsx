@@ -9,7 +9,7 @@ const WS_URL = "ws://localhost:3000/ws/inventory"
 export default function InventoryManager() {
   const [inventory, setInventory] = useState<Inventory>()
 
-  const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL, {
+  const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL + "/1", {
     share: false,
     shouldReconnect: () => true,
   })

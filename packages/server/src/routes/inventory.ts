@@ -3,7 +3,7 @@ import { addItem, deleteItem } from "../controllers/inventory.controller"
 
 const router = express.Router()
 
-router.post("/item", addItem)
-router.delete("/item/:id", deleteItem)
+router.post("/:id/item", addItem)
+router.delete("/:id/item/:itemId", deleteItem)
 
 export default router
