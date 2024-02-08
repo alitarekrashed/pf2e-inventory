@@ -7,10 +7,10 @@ import { InventoryContext } from "../lib/inventory.context"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
-export default function InventoryManager() {
+export default function InventoryManager({ id }: { id: string }) {
   const [inventory, setInventory] = useState<Inventory>()
 
-  const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL + "/1", {
+  const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL + `/${id}`, {
     share: false,
     shouldReconnect: () => true,
   })
@@ -32,7 +32,7 @@ export default function InventoryManager() {
     // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
       <>
-        <InventoryContext.Provider value={inventory.id}>
+        <InventoryContext.Provider value={id}>
           <AddItemDrawer />
           <InventoryGrid inventory={inventory} />
         </InventoryContext.Provider>

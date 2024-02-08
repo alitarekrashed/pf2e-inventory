@@ -1,24 +1,39 @@
 import { NextFunction, Request, Response } from "express"
-import { Inventory } from "@pf2e-inventory/shared"
+import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
 import { expressWs } from "../app"
 
-const inventory: Inventory = {
-  id: "1",
-  money: {
-    platinum: 0,
-    gold: 0,
-    silver: 0,
-    copper: 0,
+const inventories: (Inventory | PartyInventory)[] = [
+  {
+    id: "1",
+    money: {
+      platinum: 0,
+      gold: 0,
+      silver: 0,
+      copper: 0,
+    },
+    items: [],
+    character: {
+      name: "Vakarai",
+      party_inventory_id: "",
+    },
+    type: "Character",
   },
-  items: [],
-  character: {
-    name: "Vakarai",
-    party_inventory_id: "",
+  {
+    id: "2",
+    money: {
+      platinum: 0,
+      gold: 0,
+      silver: 0,
+      copper: 0,
+    },
+    items: [],
+    party: {
+      name: "Pirates",
+      inventory_ids: ["1"],
+    },
+    type: "Party",
   },
-  type: "Character",
-}
-
-const inventories: Inventory[] = [inventory]
+]
 
 function findInventory(id: string) {
   return inventories.find((value) => value.id === id)
@@ -32,7 +47,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
 
   const value = findInventory(inventoryId)
   value?.items.push({
-    id: `${inventory.items.length}`,
+    id: `${value.items.length}`,
     item: req.body,
   })
   expressWs.getWss().clients.forEach((client: WebSocket) => {
