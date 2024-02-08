@@ -8,6 +8,7 @@ import DarkModeToggle, { ColorModeContext } from "./components/dark-mode-toggle.
 import Home from "./components/home.component"
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material"
 import React from "react"
+import { Outlet } from "react-router-dom"
 
 function App() {
   const [mode, setMode] = React.useState<"light" | "dark">("dark")
@@ -38,7 +39,7 @@ function App() {
           <Container maxWidth={"xl"}>
             <DarkModeToggle />
             <Container maxWidth={"xl"}>
-              <Home />
+              <Outlet />
             </Container>
           </Container>
         </ThemeProvider>

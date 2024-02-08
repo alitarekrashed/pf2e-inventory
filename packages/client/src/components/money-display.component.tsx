@@ -23,5 +23,5 @@ function CoinDisplay({ money, type }: { money: Money; type: Currencies }) {
 }
 
 function Image({ type }: { type: string }) {
-  return <img src={`${type}-coin.png`} width="14" height="14" alt={type} />
+  return <img src={`/${type}-coin.png`} width="14" height="14" alt={type} />
 }
