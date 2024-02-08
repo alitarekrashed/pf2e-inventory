@@ -40,6 +40,12 @@ function findInventory(id: string) {
   return inventories.find((value) => value.id === id)
 }
 
+export const fetchInventory = async (req: Request, res: Response, next: NextFunction) => {
+  const inventoryId: string = req.params.id
+  const value = findInventory(inventoryId)
+  res.send(value)
+}
+
 // TODO eventually there needs to be a distinction between Equipment (Pathfinder rule item) and CharacterItem (item on character)
 // different ids, etc.
 

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client"
 import App from "./app.tsx"
 import "./index.css"
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import InventoryRoute from "./routes/inventory.route.tsx"
+import InventoryRoute, { loader as inventoryLoader } from "./routes/inventory.route.tsx"
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,7 @@ const router = createBrowserRouter([
       {
         path: "/inventory/:inventoryId",
         element: <InventoryRoute />,
+        loader: inventoryLoader,
       },
     ],
   },
