@@ -1,6 +1,7 @@
 export type Rarity = "uncommon"
 export type Category = "Adventuring Gear"
 export type InventoryType = "Party" | "Character"
+export type Currencies = "platinum" | "gold" | "silver" | "copper"
 
 export interface Money {
   platinum: number

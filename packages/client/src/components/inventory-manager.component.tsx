@@ -43,7 +43,7 @@ export default function InventoryManager({ id }: { id: string }) {
     inventory && (
       <>
         <InventoryContext.Provider value={id}>
-          <Box sx={{ display: "flex", px: "8px", pt: "8px", textAlign: "center" }}>
+          <Box sx={{ display: "flex", px: "8px", pt: "8px", alignItems: "center", textAlign: "center" }}>
             <MoneyDisplay money={inventory.money} />
             <Typography variant="h6" sx={{ flex: "1 1 auto" }}>
               {getName()}
