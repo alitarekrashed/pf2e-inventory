@@ -18,6 +18,8 @@ export async function loader({ params }: { params: any }): Promise<InventoryLoad
   const partyId = inventory.type === "Character" ? inventory.character.party_inventory_id : inventory.id
   const linkedInventories: { id: string; name: string }[] = []
 
+  // TODO consider moving some of this to the backend, it's only ever called once here. we don't really need a 'get inventory' or 'get inventories' otherwise...
+
   if (isCharacter) {
     const party: PartyInventory = (await getInventory(partyId)) as PartyInventory
     const relatedInventories: Inventory[] = (await getInventories(party.party.inventory_ids)) as Inventory[]
