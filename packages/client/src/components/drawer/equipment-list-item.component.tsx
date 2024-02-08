@@ -3,6 +3,7 @@ import { Equipment } from "@pf2e-inventory/shared"
 import { FaChevronDown, FaChevronUp, FaPlus } from "react-icons/fa"
 import { addItem } from "../../services/inventory.service"
 import { useState } from "react"
+import EquipmentDetails from "../equipment-details.component"
 
 export default function EquipmentListItem({ value }: { value: Equipment }) {
   const [open, setOpen] = useState<boolean>(false)
@@ -33,6 +34,7 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
         />
       </ListItem>
       <Collapse in={open} unmountOnExit>
+        <EquipmentDetails value={value} />
         {value.description}
       </Collapse>
       <Divider />
