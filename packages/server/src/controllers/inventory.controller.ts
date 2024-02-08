@@ -7,7 +7,7 @@ const inventories: (Inventory | PartyInventory)[] = [
     id: "1",
     money: {
       platinum: 0,
-      gold: 0,
+      gold: 15,
       silver: 0,
       copper: 0,
     },
@@ -21,9 +21,9 @@ const inventories: (Inventory | PartyInventory)[] = [
   {
     id: "2",
     money: {
-      platinum: 0,
-      gold: 0,
-      silver: 0,
+      platinum: 10,
+      gold: 5,
+      silver: 2,
       copper: 0,
     },
     items: [],

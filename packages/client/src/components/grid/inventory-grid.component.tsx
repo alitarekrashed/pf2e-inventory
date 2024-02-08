@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
 import Paper from "@mui/material/Paper"
 import InventoryGridRow from "./inventory-grid-row.component"

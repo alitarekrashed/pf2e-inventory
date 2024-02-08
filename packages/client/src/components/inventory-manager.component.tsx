@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import { InventoryContext } from "../lib/inventory.context"
 import { Box, Typography } from "@mui/material"
+import MoneyDisplay from "./money-display.component"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
@@ -43,6 +44,7 @@ export default function InventoryManager({ id }: { id: string }) {
       <>
         <InventoryContext.Provider value={id}>
           <Box sx={{ display: "flex", px: "8px", pt: "8px", textAlign: "center" }}>
+            <MoneyDisplay money={inventory.money} />
             <Typography variant="h6" sx={{ flex: "1 1 auto" }}>
               {getName()}
             </Typography>

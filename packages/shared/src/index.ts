@@ -2,14 +2,16 @@ export type Rarity = "uncommon"
 export type Category = "Adventuring Gear"
 export type InventoryType = "Party" | "Character"
 
+export interface Money {
+  platinum: number
+  gold: number
+  silver: number
+  copper: number
+}
+
 export interface PartyInventory {
   id: string
-  money: {
-    platinum: number
-    gold: number
-    silver: number
-    copper: number
-  }
+  money: Money
   items: CharacterItem[]
   party: {
     name: string
@@ -20,12 +22,7 @@ export interface PartyInventory {
 
 export interface Inventory {
   id: string
-  money: {
-    platinum: number
-    gold: number
-    silver: number
-    copper: number
-  }
+  money: Money
   items: CharacterItem[]
   character: {
     name: string
