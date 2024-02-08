@@ -1,14 +1,15 @@
-import { Inventory } from "@pf2e-inventory/shared"
+import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
 import AddItemDrawer from "./drawer/add-item-drawer.component"
 import InventoryGrid from "./grid/inventory-grid.component"
 import { useEffect, useState } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 import { InventoryContext } from "../lib/inventory.context"
+import { Box, Typography } from "@mui/material"
 
 const WS_URL = "ws://localhost:3000/ws/inventory"
 
 export default function InventoryManager({ id }: { id: string }) {
-  const [inventory, setInventory] = useState<Inventory>()
+  const [inventory, setInventory] = useState<Inventory | PartyInventory>()
 
   const { lastJsonMessage, sendJsonMessage, readyState } = useWebSocket(WS_URL + `/${id}`, {
     share: false,
@@ -28,12 +29,25 @@ export default function InventoryManager({ id }: { id: string }) {
     }
   }, [lastJsonMessage])
 
+  const getName = () => {
+    if (inventory?.type === "Character") {
+      return inventory.character.name
+    } else {
+      return inventory?.party.name
+    }
+  }
+
   return (
     // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
       <>
         <InventoryContext.Provider value={id}>
-          <AddItemDrawer />
+          <Box sx={{ display: "flex", px: "8px", pt: "8px", textAlign: "center" }}>
+            <Typography variant="h6" sx={{ flex: "1 1 auto" }}>
+              {getName()}
+            </Typography>
+            <AddItemDrawer />
+          </Box>
           <InventoryGrid inventory={inventory} />
         </InventoryContext.Provider>
       </>

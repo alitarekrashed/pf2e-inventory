@@ -1,20 +1,12 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
-import { Inventory } from "@pf2e-inventory/shared"
+import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
 import Paper from "@mui/material/Paper"
 import InventoryGridRow from "./inventory-grid-row.component"
 
-export default function InventoryGrid({ inventory }: { inventory: Inventory }) {
+export default function InventoryGrid({ inventory }: { inventory: Inventory | PartyInventory }) {
   return (
     <>
       <TableContainer component={Paper}>
-        <Typography
-          sx={{ flex: "1 1 100%", px: "8px", pt: "8px", textAlign: "center" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Inventory
-        </Typography>
         <Table>
           <TableHead>
             <TableRow>

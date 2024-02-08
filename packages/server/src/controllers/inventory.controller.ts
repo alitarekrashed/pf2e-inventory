@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
-import { expressWs } from "../app"
+import { connectionMap } from "../routes/ws-inventory"
 
 const inventories: (Inventory | PartyInventory)[] = [
   {
@@ -50,7 +50,8 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     id: `${value.items.length}`,
     item: req.body,
   })
-  expressWs.getWss().clients.forEach((client: WebSocket) => {
+
+  connectionMap.get(inventoryId)?.forEach((client: WebSocket) => {
     client.send(getInventory(inventoryId))
   })
   res.send()
@@ -65,7 +66,7 @@ export const deleteItem = async (req: Request, res: Response, next: NextFunction
   const index = value!.items.findIndex((value) => value.id === itemId)
   value?.items.splice(index, 1)
 
-  expressWs.getWss().clients.forEach((client: WebSocket) => {
+  connectionMap.get(inventoryId)?.forEach((client: WebSocket) => {
     client.send(getInventory(inventoryId))
   })
   res.send()
