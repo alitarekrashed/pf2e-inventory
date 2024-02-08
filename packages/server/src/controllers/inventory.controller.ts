@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
-import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
+import { CharacterItem, Inventory, MoveItemRequest, PartyInventory } from "@pf2e-inventory/shared"
 import { connectionMap } from "../routes/ws-inventory"
+import { v4 as uuidv4 } from "uuid"
 
 const inventories: (Inventory | PartyInventory)[] = [
   {
@@ -14,7 +15,7 @@ const inventories: (Inventory | PartyInventory)[] = [
     items: [],
     character: {
       name: "Vakarai",
-      party_inventory_id: "",
+      party_inventory_id: "2",
     },
     type: "Character",
   },
@@ -47,7 +48,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
 
   const value = findInventory(inventoryId)
   value?.items.push({
-    id: `${value.items.length}`,
+    id: uuidv4(),
     item: req.body,
   })
 
@@ -69,6 +70,31 @@ export const deleteItem = async (req: Request, res: Response, next: NextFunction
   connectionMap.get(inventoryId)?.forEach((client: WebSocket) => {
     client.send(getInventory(inventoryId))
   })
+  res.send()
+}
+
+export const moveItem = async (req: Request, res: Response, next: NextFunction) => {
+  const inventoryId: string = req.params.id
+  const itemId: string = req.params.itemId
+  const request: MoveItemRequest = req.body
+
+  const sourceInventory = findInventory(inventoryId)
+  const targetInventory = findInventory(request.target)
+
+  if (sourceInventory && targetInventory) {
+    const index = sourceInventory.items.findIndex((value) => value.id === itemId)
+    const itemToMove: CharacterItem = sourceInventory.items.splice(index, 1)[0]
+    targetInventory.items.push(itemToMove)
+  }
+
+  connectionMap.get(inventoryId)?.forEach((client: WebSocket) => {
+    client.send(getInventory(inventoryId))
+  })
+
+  connectionMap.get(request.target)?.forEach((client: WebSocket) => {
+    client.send(getInventory(request.target))
+  })
+
   res.send()
 }
 

@@ -8,7 +8,7 @@ import { InventoryContext } from "../../lib/inventory.context"
 
 export default function EquipmentListItem({ value }: { value: Equipment }) {
   const [open, setOpen] = useState<boolean>(false)
-  const inventoryId: string = useContext(InventoryContext)
+  const inventoryContext = useContext(InventoryContext)
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function EquipmentListItem({ value }: { value: Equipment }) {
             aria-label="add"
             onClick={($event) => {
               $event.stopPropagation()
-              addItem(inventoryId, value)
+              addItem(inventoryContext.id, value)
             }}
           >
             <FaPlus size={12} />

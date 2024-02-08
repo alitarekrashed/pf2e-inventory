@@ -38,11 +38,20 @@ export default function InventoryManager({ id }: { id: string }) {
     }
   }
 
+  const getRelatedIds = () => {
+    if (inventory?.type === "Character") {
+      return [inventory.character.party_inventory_id]
+    } else if (inventory) {
+      return inventory?.party.inventory_ids
+    }
+    return []
+  }
+
   return (
     // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
       <>
-        <InventoryContext.Provider value={id}>
+        <InventoryContext.Provider value={{ id: id, related: getRelatedIds() }}>
           <Box sx={{ display: "flex", px: "8px", pt: "8px", alignItems: "center", textAlign: "center" }}>
             <MoneyDisplay money={inventory.money} />
             <Typography variant="h6" sx={{ flex: "1 1 auto" }}>

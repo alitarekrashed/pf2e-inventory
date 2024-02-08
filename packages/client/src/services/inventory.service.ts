@@ -1,4 +1,4 @@
-import { Equipment } from "@pf2e-inventory/shared"
+import { Equipment, MoveItemRequest } from "@pf2e-inventory/shared"
 import axios from "axios"
 
 export async function addItem(id: string, item: Equipment): Promise<void> {
@@ -17,4 +17,17 @@ export async function deleteItem(inventoryId: string, itemId: string): Promise<v
       "Access-Control-Allow-Origin": "*",
     },
   })
+}
+
+export async function moveItem(inventoryId: string, itemId: string, targetId: string): Promise<void> {
+  await axios.post<MoveItemRequest>(
+    `http://localhost:3000/inventory/${inventoryId}/item/${itemId}/move`,
+    { target: targetId },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    },
+  )
 }

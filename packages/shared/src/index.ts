@@ -58,3 +58,7 @@ export interface Coinage {
   value: number
   type: Coin
 }
+
+export interface MoveItemRequest {
+  target: string
+}

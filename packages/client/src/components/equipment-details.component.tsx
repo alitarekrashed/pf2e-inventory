@@ -5,7 +5,7 @@ import PriceDisplay from "./price-display.component"
 export default function EquipmentDetails({ value }: { value: Equipment }) {
   return (
     <>
-      <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+      <Typography component={Box} sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
         <Box>
           Price <PriceDisplay price={value.price}></PriceDisplay>
         </Box>
