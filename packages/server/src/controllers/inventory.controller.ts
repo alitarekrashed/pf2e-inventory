@@ -30,9 +30,24 @@ const inventories: (Inventory | PartyInventory)[] = [
     items: [],
     party: {
       name: "Pirates",
-      inventory_ids: ["1"],
+      inventory_ids: ["1", "2"],
     },
     type: "Party",
+  },
+  {
+    id: "3",
+    money: {
+      platinum: 9999,
+      gold: 0,
+      silver: 0,
+      copper: 0,
+    },
+    items: [],
+    character: {
+      name: "Big Z",
+      party_inventory_id: "2",
+    },
+    type: "Character",
   },
 ]
 
