@@ -1,29 +1,62 @@
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  CardContent,
-  CardHeader,
-  ClickAwayListener,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-  Typography,
-} from "@mui/material"
-import Box from "@mui/material/Box"
-import Drawer from "@mui/material/Drawer"
+import { Box, Button, ButtonGroup, Card, CardContent, CardHeader, ClickAwayListener, Drawer, Grow, MenuItem, MenuList, Popper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Inventory, PartyInventory } from "@pf2e-inventory/shared"
+import Paper from "@mui/material/Paper"
 import { CharacterItem } from "@pf2e-inventory/shared"
-import React, { useContext, useRef, useState } from "react"
-import { deleteItem, moveItem } from "../../services/inventory.service"
-import EquipmentDetails from "../equipment-details.component"
-import { InventoryContext } from "../../lib/inventory.context"
+import PriceDisplay from "./price-display.component"
+import { useContext, useRef, useState } from "react"
+import React from "react"
 import { FaChevronDown } from "react-icons/fa"
+import { InventoryContext } from "../lib/inventory.context"
+import { deleteItem, moveItem } from "../services/inventory.service"
+import EquipmentDetails from "./equipment-details.component"
+
+export default function InventoryGrid({ inventory }: { inventory: Inventory | PartyInventory }) {
+  return (
+    <>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>Name</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell>Level</TableCell>
+              <TableCell>Bulk</TableCell>
+              <TableCell>Value</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {inventory && inventory.items.map((row) => <InventoryGridRow key={`${row.id}`} value={row} />)}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
+  )
+}
+
+function InventoryGridRow({ value }: { value: CharacterItem }) {
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
+
+  return (
+    <>
+      <TableRow onClick={() => setDrawerOpen(true)}>
+        <TableCell></TableCell>
+        <TableCell>{value.item.name}</TableCell>
+        <TableCell>{value.item.category}</TableCell>
+        <TableCell>{value.item.level}</TableCell>
+        <TableCell>{value.item.bulk}</TableCell>
+        <TableCell>
+          <PriceDisplay price={value.item.price} />
+        </TableCell>
+      </TableRow>
+      <InventoryItemDrawer value={value} isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+    </>
+  )
+}
 
 type Anchor = "right"
 
-export default function InventoryItemDrawer({
+function InventoryItemDrawer({
   value,
   isOpen,
   onClose,
