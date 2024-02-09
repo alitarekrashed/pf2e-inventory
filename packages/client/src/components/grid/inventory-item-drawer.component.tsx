@@ -87,7 +87,7 @@ function MoveItemButtonGroup({ itemId }: { itemId: string }) {
     setOpen((prevOpen) => !prevOpen)
   }
 
-  const handleClick = (event: any, index: number) => {
+  const handleClick = (index: number) => {
     moveItem(inventoryContext.id, itemId, options[index].id)
     setOpen(false)
   }
@@ -130,7 +130,7 @@ function MoveItemButtonGroup({ itemId }: { itemId: string }) {
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id="split-button-menu" autoFocusItem>
                   {options.map((option, index) => (
-                    <MenuItem key={option.id} onClick={(event) => handleClick(event, index)}>
+                    <MenuItem key={option.id} onClick={() => handleClick(index)}>
                       {option.name}
                     </MenuItem>
                   ))}
