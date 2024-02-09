@@ -19,7 +19,7 @@ import React, { useContext, useRef, useState } from "react"
 import { deleteItem, moveItem } from "../../services/inventory.service"
 import EquipmentDetails from "../equipment-details.component"
 import { InventoryContext } from "../../lib/inventory.context"
-import { FaArrowDown, FaChevronDown } from "react-icons/fa"
+import { FaChevronDown } from "react-icons/fa"
 
 type Anchor = "right"
 

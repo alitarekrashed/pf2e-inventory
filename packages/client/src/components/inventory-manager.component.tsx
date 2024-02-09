@@ -38,15 +38,6 @@ export default function InventoryManager({ id, linked }: { id: string; linked: {
     }
   }
 
-  const getRelatedIds = () => {
-    if (inventory?.type === "Character") {
-      return [inventory.character.party_inventory_id]
-    } else if (inventory) {
-      return inventory?.party.inventory_ids
-    }
-    return []
-  }
-
   return (
     // TODO create a InventoryProvider here that allows me to retrieve the inventory easily, that way i dont have to prop drill
     inventory && (
